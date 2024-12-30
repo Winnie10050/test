@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>註冊帳戶</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="logo-and-nav">
+            <h1>貪婪天堂</h1>
+            <nav>
+                <a href="..\home.html">Home</a>
+                <a href="..\header/About Us.html">About Us</a>
+                <a href="..\header/FAQ.html">FAQ</a>
+                <a href="..\header/Contact.html">Contact</a>
+                <a href="..\header/Shop.html">Shop</a>
+            </nav>
+        </div>
+        <div class="actions">
+            <input type="text" placeholder="Search">
+            <button onclick="location.href='/cart.html'">購物車</button>
+            <button id="accountButton">帳號</button>
+            <button id="logoutButton" style="display: none;">登出</button>
+        </div>
+    </div>
+
+    <div class="content-container form-container">
+        <br>
+        <h2>註冊帳戶</h2>
+        <p>請填寫以下資訊以註冊新帳戶。所有欄位均為必填，並且我們會保護您的個人資料 </p>
+
+        <form id="registrationForm">
+            <label for="fullName">全名</label>
+            <input type="text" id="fullName" name="fullName" required placeholder="請輸入您的全名">
+            <br>
+
+            <label for="username">使用者名稱</label>
+            <input type="text" id="username" name="username" required placeholder="請輸入您的使用者名稱">
+            <br>
+
+            <label for="email">電子郵件</label>
+            <input type="email" id="email" name="email" required placeholder="請輸入您的電子郵件地址">
+            <br>
+
+            <label for="phone">電話號碼</label>
+            <input type="tel" id="phone" name="phone" placeholder="請輸入您的電話號碼 (可選)">
+            <br>
+
+            <label for="birthdate">出生日期</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+            <br>
+
+            <label for="password">密碼</label>
+            <input type="password" id="password" name="password" required placeholder="請輸入您的密碼">
+            <div id="passwordStrength" class="password-strength" style="display: none;">
+                <span>密碼強度：</span>
+                <span id="strengthMessage"></span>
+            </div>
+            <br>
+
+            <label for="confirmPassword">確認密碼</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="請再次輸入您的密碼">
+            <br>
+
+            <label for="terms">
+                <input type="checkbox" id="terms" name="terms" required> 我同意<a href="#">服務條款</a>與<a href="#">隱私政策</a>
+            </label>
+            <br>
+
+            <button type="submit">註冊</button>
+        </form>
+
+        <!-- 註冊成功訊息 -->
+        <div id="successMessage" style="display:none;">
+            <h3>註冊成功！</h3>
+            <p>恭喜您已成功註冊，您現在可以使用您的帳戶登入。</p>
+        </div>
+    </div>
+
+    <script>
+        const registrationForm = document.getElementById("registrationForm");
+        const successMessage = document.getElementById("successMessage");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const passwordStrength = document.getElementById("passwordStrength");
+        const strengthMessage = document.getElementById("strengthMessage");
+
+        // Password strength checker
+        passwordInput.addEventListener("input", () => {
+            const password = passwordInput.value;
+            if (password.length >= 8) {
+                passwordStrength.style.display = "block";
+                strengthMessage.textContent = "強";
+                strengthMessage.style.color = "green";
+            } else if (password.length >= 5) {
+                passwordStrength.style.display = "block";
+                strengthMessage.textContent = "中";
+                strengthMessage.style.color = "orange";
+            } else {
+                passwordStrength.style.display = "block";
+                strengthMessage.textContent = "弱";
+                strengthMessage.style.color = "red";
+            }
+        });
+
+        // Form submission handler
+        registrationForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            const fullName = document.getElementById("fullName").value;
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const birthdate = document.getElementById("birthdate").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Validate passwords
+            if (password !== confirmPassword) {
+                alert("密碼不一致，請重新確認您的密碼！");
+                return;
+            }
+
+            // Save user data in localStorage (or backend)
+            const users = JSON.parse(localStorage.getItem("users")) || {};
+            if (users[username]) {
+                alert("該使用者名稱已被註冊！");
+            } else {
+                users[username] = { fullName, email, phone, birthdate, password };
+                localStorage.setItem("users", JSON.stringify(users));
+
+                successMessage.style.display = "block";
+                setTimeout(function() {
+                    window.location.href = "../home.html";
+                }, 3000); // Redirect after 3 seconds
+
+                registrationForm.style.display = "none"; // Hide registration form
+            }
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2024 貪婪天堂. All rights reserved</p>
+    </footer>
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="login-modal" id="loginModal">
+      <h3 id="modalTitle">登入</h3>
+      <input type="text" id="usernameInput" placeholder="使用者名稱">
+      <input type="password" id="passwordInput" placeholder="密碼">
+      <button id="loginSubmitButton">登入</button>
+      <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+      <button onclick="closeLoginModal()">取消</button>
+    </div>
+  
+    <script>
+      const accountButton = document.getElementById("accountButton");
+      const logoutButton = document.getElementById("logoutButton");
+      const loginModal = document.getElementById("loginModal");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const usernameInput = document.getElementById("usernameInput");
+      const loginSubmitButton = document.getElementById("loginSubmitButton");
+  
+      loginSubmitButton.addEventListener("click", () => {
+        const username = usernameInput.value.trim();
+        const password = document.getElementById("passwordInput").value.trim();
+
+        if (!username || !password) {
+            alert("請輸入使用者名稱和密碼！");
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("users")) || {};
+
+        if (users[username] && users[username].password === password) {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("username", username);
+            alert(`${username}，登入成功！`);
+            closeLoginModal();
+            updateLoginStatus();
+        } else {
+            alert("使用者名稱或密碼錯誤！");
+        }
+        });
+
+  
+      const updateLoginStatus = () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const username = localStorage.getItem("username");
+  
+        if (isLoggedIn === "true" && username) {
+          accountButton.textContent = `${username} 已登入`;
+          accountButton.disabled = true;
+          logoutButton.style.display = "inline-block";
+          passwordInput.value = ""; // 清空密碼欄
+        } else {
+          accountButton.textContent = "帳號";
+          accountButton.disabled = false;
+          logoutButton.style.display = "none";
+        }
+      };
+  
+      accountButton.addEventListener("click", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          loginModal.classList.add("active");
+          modalOverlay.classList.add("active");
+        }
+      });
+  
+      logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("username");
+        alert("已登出！");
+        updateLoginStatus();
+      });
+  
+      const closeLoginModal = () => {
+        loginModal.classList.remove("active");
+        modalOverlay.classList.remove("active");
+        usernameInput.value = "";
+      };
+  
+      modalOverlay.addEventListener("click", closeLoginModal);
+  
+      window.addEventListener("load", updateLoginStatus);
+    </script>
+</body>
+</html>

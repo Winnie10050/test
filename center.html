@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員中心</title>
+  <link rel="stylesheet" href="center.css">
+</head>
+<body>
+  <div class="member-center-container">
+    <header class="member-center-header">
+      <h1>會員中心</h1>
+    </header>
+
+    <nav class="member-center-nav">
+      <ul>
+        <li><a href="#profile">個人資料</a></li>
+        <li><a href="#orders">我的訂單</a></li>
+        <li><a href="#settings">帳戶設定</a></li>
+      </ul>
+    </nav>
+
+    <main class="member-center-main">
+      <section id="profile">
+        <h2>個人資料</h2>
+        <p>使用者名稱：<span id="usernameDisplay">Guest</span></p>
+        <p>Email：example@example.com</p>
+      </section>
+
+      <section id="orders">
+        <h2>我的訂單</h2>
+        <p>目前沒有任何訂單。</p>
+      </section>
+
+      <section id="settings">
+        <h2>帳戶設定</h2>
+        <button id="logoutButton">登出</button>
+      </section>
+    </main>
+
+    <footer class="member-center-footer">
+      <p>© 2024 貪婪天堂. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    // 動態顯示使用者名稱
+    window.addEventListener("load", () => {
+      const username = localStorage.getItem("username") || "Guest";
+      document.getElementById("usernameDisplay").textContent = username;
+    });
+
+    // 登出按鈕功能
+    const logoutButton = document.getElementById("logoutButton");
+    logoutButton.addEventListener("click", () => {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("username");
+      alert("已成功登出！");
+      window.location.href = "home.html"; // 返回首頁
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="ach.css">
+
+</head>
+<body>
+    <div class="banner">
+        <div class="logo-and-nav">
+            <h1>貪婪天堂</h1>
+            <nav>
+                <a href="..\home.html">Home</a>
+                <a href="..\header/About Us.html">About Us</a>
+                <a href="..\header/FAQ.html">FAQ</a>
+                <a href="..\header/Contact.html">Contact</a>
+                <a href="..\header/Shop.html">Shop</a>
+            </nav>
+        </div>
+        <div class="actions">
+            <input type="text" placeholder="Search">
+            <button onclick="location.href='/cart.html'">購物車</button>
+            <button id="accountButton">帳號</button>
+            <button id="logoutButton" style="display: none;">登出</button>
+            <button id="memberCenterButton" style="display: none;">會員中心</button>     
+
+        </div>
+    </div>
+
+    <div class="content-container">
+        <p>
+           
+            <strong>商品是否提供保固服務？</strong><br>
+我們所有的商品均提供法定保固，保固期限依商品種類而定。若商品出現故障或問題，請立即聯繫客服，並提供購買憑證以協助處理保固申請。<br>
+<br>
+<strong>如何追蹤我的訂單狀態？</strong><br>
+您可以登入帳號後，進入「訂單查詢」頁面，查看訂單的最新處理狀態及物流資訊。如果有任何疑問，請聯繫客服團隊協助查詢。<br>
+<br>
+<strong>如果商品在運送過程中損壞怎麼辦？</strong><br>
+如果您在收到商品時發現商品受損，請立即拍下損壞部分的照片並聯繫客服。客服將協助您處理換貨或退貨的相關事宜。<br>
+<br>
+<strong>是否可以選擇指定的物流公司？</strong><br>
+目前我們會根據地區和商品性質選擇最適合的物流公司，確保商品安全快速送達。如果您有特殊需求，請在下單後立即聯繫客服。<br>
+<br>
+<strong>我的付款是否安全？</strong><br>
+我們的平台使用加密技術確保您的付款資訊安全，並支持多種安全支付方式，包括信用卡、第三方支付平台等。如果您在付款過程中遇到問題，請聯繫客服協助處理。<br>
+<br>
+<strong>國際訂單是否提供配送？</strong><br>
+我們提供部分地區的國際配送服務。請在結帳時查看您的地區是否支持配送。如果您對配送政策有任何疑問，請聯繫客服。<br>
+<br>
+<strong>是否提供折扣或促銷活動？</strong><br>
+我們定期推出各類折扣和促銷活動，您可以關注我們的網站或訂閱電子報以獲取最新優惠資訊。如果有促銷碼，請在結帳時輸入以享受折扣。<br>
+<br>
+            </p>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2024 貪婪天堂. All rights reserved</p>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="login-modal" id="loginModal">
+      <h3 id="modalTitle">登入</h3>
+      <input type="text" id="usernameInput" placeholder="使用者名稱">
+      <input type="password" id="passwordInput" placeholder="密碼">
+      <button id="loginSubmitButton">登入</button>
+      <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+      <button id="memberCenterButton" style="display: none;">會員中心</button>     
+
+      <button onclick="closeLoginModal()">取消</button>
+    </div>
+  
+    <script>
+      const accountButton = document.getElementById("accountButton");
+      const logoutButton = document.getElementById("logoutButton");
+      const memberCenterButton = document.getElementById("memberCenterButton");
+      const loginModal = document.getElementById("loginModal");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const usernameInput = document.getElementById("usernameInput");
+      const loginSubmitButton = document.getElementById("loginSubmitButton");
+  
+      // 更新登入狀態
+    const updateLoginStatus = () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const username = localStorage.getItem("username");
+
+        if (isLoggedIn === "true" && username) {
+            accountButton.textContent = `${username} 已登入`;
+            accountButton.disabled = true;
+            logoutButton.style.display = "inline-block";
+            memberCenterButton.style.display = "inline-block";
+        } else {
+            accountButton.textContent = "帳號";
+            accountButton.disabled = false;
+            logoutButton.style.display = "none";
+            memberCenterButton.style.display = "none";
+        }
+    };
+
+      accountButton.addEventListener("click", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          loginModal.classList.add("active");
+          modalOverlay.classList.add("active");
+        }
+      });
+  
+      logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("username");
+        alert("已登出！");
+        updateLoginStatus();
+      });
+      // 處理登入提交
+    loginSubmitButton.addEventListener("click", () => {
+        const username = usernameInput.value.trim();
+        if (username) {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("username", username);
+            alert(`${username}，登入成功！`);
+            closeLoginModal();
+            updateLoginStatus();
+        } else {
+            alert("請輸入使用者名稱！");
+        }
+    });
+      const closeLoginModal = () => {
+        loginModal.classList.remove("active");
+        modalOverlay.classList.remove("active");
+        usernameInput.value = "";
+      };
+  
+      modalOverlay.addEventListener("click", closeLoginModal);
+      // 會員中心按鈕跳轉
+    memberCenterButton.addEventListener("click", () => {
+        window.location.href = "/center.html";
+    });
+      window.addEventListener("load", updateLoginStatus);
+    </script>
+  
+
+
+</body>
+</html>

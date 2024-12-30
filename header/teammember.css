@@ -1,0 +1,36 @@
+        /* 團隊區域 */
+        .team-section {
+            margin-top: 40px;
+        }
+        
+        .team-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        .team-member img {
+            width: 150px;  /* 固定照片寬度 */
+            height: 150px; /* 固定照片高度 */
+            border-radius: 50%; /* 圓形照片 */
+            margin-right: 20px;
+            object-fit: cover; /* 確保圖片不會變形 */
+        }
+        
+        .member-info h3 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        .member-info p {
+            margin-top: 5px;
+            font-size: 1rem;
+            color: #666;
+        }

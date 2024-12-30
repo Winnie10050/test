@@ -1,0 +1,120 @@
+/* 熱銷商品容器 */
+#hotItems {
+    display: flex;
+    overflow-x: scroll;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 10px;
+    background-color: #f9f4f2;
+    scrollbar-width: none; /* 隱藏 Firefox 滾動條 */
+    cursor: grab; /* 提示用戶可以拖動 */
+}
+
+#hotItems::-webkit-scrollbar {
+    display: none; /* 隱藏 Chrome 滾動條 */
+}
+
+#hotItems.dragging {
+    cursor: grabbing; /* 拖動時顯示抓取手勢 */
+}
+
+/* 單個商品項目 */
+.hot-item {
+    flex: 0 0 auto;
+    text-align: center;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease; /* 添加過渡效果 */
+}
+
+.hot-item:hover {
+    transform: scale(1.05); /* 懸停放大效果 */
+}
+
+.hot-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 5px; /* 圖片圓角效果 */
+}
+
+.hot-item h3 {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* 箭頭按鈕容器 */
+#hotItemsWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: 90%; /* 居中並限制寬度 */
+    margin: 20px auto; /* 上下居中顯示 */
+}
+
+/* 左右箭頭按鈕 */
+.arrow-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.arrow-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1); /* 懸停放大效果 */
+}
+
+#prevButton {
+    left: 10px; /* 靠左對齊 */
+}
+
+#nextButton {
+    right: 10px; /* 靠右對齊 */
+}
+/* 初始樣式 */
+.hot-items-title {
+    opacity: 0; /* 初始透明度 */
+    transform: translateY(20px); /* 初始向下偏移 */
+    text-align: center;
+    margin: 20px 0;
+    font-family: "Arial, sans-serif";
+    font-size: 24px;
+    color: #333;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* 添加過渡效果 */
+}
+
+/* 動畫啟動時 */
+.hot-items-title.animated {
+    opacity: 1; /* 顯示 */
+    transform: translateY(0); /* 回到原位 */
+}
+
+/* 可選：添加其他裝飾效果 */
+.hot-items-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin: 10px auto;
+    background-color: #333; /* 黑色分隔線 */
+    border-radius: 2px; /* 圓角效果 */
+}

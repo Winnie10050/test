@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .member-center-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+  }
+  
+  .member-center-header {
+    margin-top: auto; /* 將 footer 推到底部 */
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    width: 100%; /* 確保與父容器寬度一致 */
+    max-width: 1200px; /* 確保一致 */
+    margin: 0 auto; /* 水平居中 */
+}
+
+  
+  .member-center-nav {
+    background-color: #555;
+    padding: 10px 20px;
+    width: 100%; /* 確保與父容器寬度一致 */
+    max-width: 1200px; /* 確保一致 */
+    margin: 0 auto; /* 水平居中 */
+  }
+  
+  .member-center-nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .member-center-nav li {
+    margin: 0 1rem;
+  }
+  
+  .member-center-nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .member-center-nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .member-center-main {
+    margin: 40px auto; /* 設定外邊距，讓容器與其他部分有空間 */
+    padding: 20px; /* 設定內邊距，讓內容與容器邊緣保持距離 */
+    max-width: 1200px; /* 限制內容寬度，讓排版更清晰 */
+    background-color: #f9f9f9; /* 背景顏色，可根據需求調整 */
+    border-radius: 10px; /* 添加圓角 */
+    width: 100%; /* 滿足響應式設計，讓內容能調整 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+  }
+  
+  .member-center-main section {
+    margin-bottom: 2rem;
+  }
+  
+  .member-center-main h2 {
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .member-center-footer {
+    margin-top: auto; /* 將 footer 推到底部 */
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    width: 100%; /* 確保與父容器寬度一致 */
+    max-width: 1200px; /* 確保一致 */
+    margin: 0 auto; /* 水平居中 */
+  }
+  

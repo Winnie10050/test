@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="ach.css">
+
+</head>
+<body>
+    <div class="banner">
+        <div class="logo-and-nav">
+            <h1>貪婪天堂</h1>
+            <nav>
+                <a href="..\home.html">Home</a>
+                <a href="..\header/About Us.html">About Us</a>
+                <a href="..\header/FAQ.html">FAQ</a>
+                <a href="..\header/Contact.html">Contact</a>
+                <a href="..\header/Shop.html">Shop</a>
+            </nav>
+        </div>
+        <div class="actions">
+            <input type="text" placeholder="Search">
+            <button onclick="location.href='/cart.html'">購物車</button>
+            <button id="accountButton">帳號</button>
+            <button id="logoutButton" style="display: none;">登出</button>
+            <button id="memberCenterButton" style="display: none;">會員中心</button>     
+
+        </div>
+    </div>
+
+    <div class="content-container">
+        <p>
+            
+            <strong>聯繫我們</strong><br>
+            <br>
+            感謝您對我們的支持！如果您有任何問題、建議或需要協助，請隨時與我們聯繫。我們的客服團隊將竭誠為您提供幫助<br>
+        <br>
+            
+            <strong>如何聯繫客服？</strong><br>
+            <br>
+            您可以通過以下方式聯繫我們的客服：
+            <br>
+            
+            電子郵件：[abcdefg1234@gmail.com]
+            我們會在24小時內回覆您的電子郵件，提供您所需的幫助與解決方案。
+            <br>
+            <br>
+            客服熱線：[01-23456789]<br>
+            您也可以撥打我們的客服熱線，與我們的專業客服人員進行即時溝通。<br>
+            <br>
+            <strong>地址</strong><br>
+            <br>
+            公司地址：[銀河系太陽太陽系行星地球30趴部分陸地]
+            <br>
+            如果您需要郵寄資料或有其他需要親自拜訪的問題，請將資料寄送至上述地址。<br>
+            <br>
+            
+
+            <strong >常見問題</strong><br>
+            <br>
+            在聯繫我們之前，請先查看我們的常見問題 (FAQ)，您可能會在這裡找到您需要的答案，這樣可以節省您的時間。
+
+
+            </p>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2024 貪婪天堂. All rights reserved</p>
+    </footer>
+
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="login-modal" id="loginModal">
+      <h3 id="modalTitle">登入</h3>
+      <input type="text" id="usernameInput" placeholder="使用者名稱">
+      <input type="password" id="passwordInput" placeholder="密碼">
+      <button id="loginSubmitButton">登入</button>
+      <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+      <button onclick="closeLoginModal()">取消</button>
+    </div>
+  
+    <script>
+      const accountButton = document.getElementById("accountButton");
+      const logoutButton = document.getElementById("logoutButton");
+      const memberCenterButton = document.getElementById("memberCenterButton");
+      const loginModal = document.getElementById("loginModal");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const usernameInput = document.getElementById("usernameInput");
+      const loginSubmitButton = document.getElementById("loginSubmitButton");
+  
+      // 更新登入狀態
+    const updateLoginStatus = () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const username = localStorage.getItem("username");
+
+        if (isLoggedIn === "true" && username) {
+            accountButton.textContent = `${username} 已登入`;
+            accountButton.disabled = true;
+            logoutButton.style.display = "inline-block";
+            memberCenterButton.style.display = "inline-block";
+        } else {
+            accountButton.textContent = "帳號";
+            accountButton.disabled = false;
+            logoutButton.style.display = "none";
+            memberCenterButton.style.display = "none";
+        }
+    };
+
+  
+      accountButton.addEventListener("click", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          loginModal.classList.add("active");
+          modalOverlay.classList.add("active");
+        }
+      });
+  
+      logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("username");
+        alert("已登出！");
+        updateLoginStatus();
+      });
+      // 處理登入提交
+    loginSubmitButton.addEventListener("click", () => {
+        const username = usernameInput.value.trim();
+        if (username) {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("username", username);
+            alert(`${username}，登入成功！`);
+            closeLoginModal();
+            updateLoginStatus();
+        } else {
+            alert("請輸入使用者名稱！");
+        }
+    });
+      const closeLoginModal = () => {
+        loginModal.classList.remove("active");
+        modalOverlay.classList.remove("active");
+        usernameInput.value = "";
+      };
+  
+      modalOverlay.addEventListener("click", closeLoginModal);
+       // 會員中心按鈕跳轉
+    memberCenterButton.addEventListener("click", () => {
+        window.location.href = "/center.html";
+    });
+
+  
+      window.addEventListener("load", updateLoginStatus);
+    </script>
+  
+
+
+</body>
+</html>

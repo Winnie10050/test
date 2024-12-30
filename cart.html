@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>product</title>
+      <link rel="stylesheet" href="cart.css">
+  
+  </head>
+  <body>
+      <div class="banner">
+          <div class="logo-and-nav">
+              <h1>貪婪天堂</h1>
+              <nav>
+                  <a href="..\home.html">Home</a>
+                  <a href="..\header/About Us.html">About Us</a>
+                  <a href="..\header/FAQ.html">FAQ</a>
+                  <a href="..\header/Contact.html">Contact</a>
+                  <a href="..\header/Shop.html">Shop</a>
+              </nav>
+          </div>
+          <div class="actions">
+              <input type="text" placeholder="Search">
+              <button onclick="location.href='/cart.html'">購物車</button>
+              <button id="accountButton">帳號</button>
+              <button id="logoutButton" style="display: none;">登出</button>
+          </div>
+      </div>
+  
+      <div class="content-container">
+          <h1>購物車</h1>
+          <div id="cartItems"></div>
+          <div class="cart-summary" id="cartSummary"></div>
+        
+          <div class="checkout-section">
+            <h2>結帳</h2>
+            <label for="paymentMethod">選擇結帳方式：</label>
+            <select id="paymentMethod">
+              <option value="creditCard">信用卡</option>
+              <option value="paypal">PayPal</option>
+              <option value="bankTransfer">銀行轉帳</option>
+              <option value="cashOnDelivery">貨到付款</option>
+            </select>
+            <button id="checkoutButton">完成結帳</button>
+          </div>
+        
+          <script>
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItemsContainer = document.getElementById("cartItems");
+            const cartSummary = document.getElementById("cartSummary");
+            const checkoutButton = document.getElementById("checkoutButton");
+            const paymentMethodSelect = document.getElementById("paymentMethod");
+        
+            function renderCart() {
+              cartItemsContainer.innerHTML = "";
+              let total = 0;
+        
+              cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                const cartItem = document.createElement("div");
+                cartItem.classList.add("cart-item");
+                cartItem.innerHTML = `
+                  <span>${item.name} - $${item.price} x ${item.quantity}</span>
+                  <div>
+                    <button onclick="updateQuantity(${index}, -1)">-</button>
+                    <button onclick="updateQuantity(${index}, 1)">+</button>
+                    <button onclick="removeItem(${index})">移除</button>
+                  </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+              });
+        
+              cartSummary.textContent = `總計: $${total.toFixed(2)}`;
+            }
+        
+            function updateQuantity(index, change) {
+              cart[index].quantity += change;
+              if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+              }
+              localStorage.setItem("cart", JSON.stringify(cart));
+              renderCart();
+            }
+        
+            function removeItem(index) {
+              cart.splice(index, 1);
+              localStorage.setItem("cart", JSON.stringify(cart));
+              renderCart();
+            }
+        
+            checkoutButton.addEventListener("click", () => {
+              if (cart.length === 0) {
+                alert("購物車是空的，無法結帳！");
+                return;
+              }
+        
+              const paymentMethod = paymentMethodSelect.value;
+              const confirmation = confirm(`您選擇了 ${getPaymentMethodName(paymentMethod)} 作為付款方式。是否確認結帳？`);
+        
+              if (confirmation) {
+                alert("結帳成功！感謝您的購買！");
+                localStorage.removeItem("cart");
+                renderCart();
+              }
+            });
+        
+            function getPaymentMethodName(method) {
+              switch (method) {
+                case "creditCard":
+                  return "信用卡";
+                case "paypal":
+                  return "PayPal";
+                case "bankTransfer":
+                  return "銀行轉帳";
+                case "cashOnDelivery":
+                  return "貨到付款";
+                default:
+                  return "未知方式";
+              }
+            }
+        
+            renderCart();
+          </script>
+      </div>
+      
+  
+      <footer>
+          <p>&copy; 2024 貪婪天堂. All rights reserved</p>
+      </footer>
+  
+  
+      <div class="modal-overlay" id="modalOverlay"></div>
+      <div class="login-modal" id="loginModal">
+        <h3 id="modalTitle">登入</h3>
+        <input type="text" id="usernameInput" placeholder="使用者名稱">
+        <input type="password" id="passwordInput" placeholder="密碼">
+        <button id="loginSubmitButton">登入</button>
+        <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+        <button onclick="closeLoginModal()">取消</button>
+      </div>
+    
+      <script>
+        const accountButton = document.getElementById("accountButton");
+        const logoutButton = document.getElementById("logoutButton");
+        const loginModal = document.getElementById("loginModal");
+        const modalOverlay = document.getElementById("modalOverlay");
+        const usernameInput = document.getElementById("usernameInput");
+        const loginSubmitButton = document.getElementById("loginSubmitButton");
+    
+        loginSubmitButton.addEventListener("click", () => {
+          const username = usernameInput.value.trim();
+          const password = document.getElementById("passwordInput").value.trim();
+  
+          if (!username || !password) {
+              alert("請輸入使用者名稱和密碼！");
+              return;
+          }
+  
+          const users = JSON.parse(localStorage.getItem("users")) || {};
+  
+          if (users[username] && users[username].password === password) {
+              localStorage.setItem("isLoggedIn", "true");
+              localStorage.setItem("username", username);
+              alert(`${username}，登入成功！`);
+              closeLoginModal();
+              updateLoginStatus();
+          } else {
+              alert("使用者名稱或密碼錯誤！");
+          }
+          });
+  
+    
+        const updateLoginStatus = () => {
+          const isLoggedIn = localStorage.getItem("isLoggedIn");
+          const username = localStorage.getItem("username");
+    
+          if (isLoggedIn === "true" && username) {
+            accountButton.textContent = `${username} 已登入`;
+            accountButton.disabled = true;
+            logoutButton.style.display = "inline-block";
+            passwordInput.value = ""; // 清空密碼欄
+          } else {
+            accountButton.textContent = "帳號";
+            accountButton.disabled = false;
+            logoutButton.style.display = "none";
+          }
+        };
+    
+        accountButton.addEventListener("click", () => {
+          const isLoggedIn = localStorage.getItem("isLoggedIn");
+          if (isLoggedIn !== "true") {
+            loginModal.classList.add("active");
+            modalOverlay.classList.add("active");
+          }
+        });
+    
+        logoutButton.addEventListener("click", () => {
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("username");
+          alert("已登出！");
+          updateLoginStatus();
+        });
+    
+        const closeLoginModal = () => {
+          loginModal.classList.remove("active");
+          modalOverlay.classList.remove("active");
+          usernameInput.value = "";
+        };
+    
+        modalOverlay.addEventListener("click", closeLoginModal);
+    
+        window.addEventListener("load", updateLoginStatus);
+      </script>
+    
+  
+  
+  </body>
+  </html>
+</body>
+</html>

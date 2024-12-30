@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貪婪天堂</title>
+    <link rel="stylesheet" href="homepage/page.css">
+    <link rel="stylesheet" href="homepage/hot.css">
+</head>
+<body>
+    <header class="banner">
+        <div class="logo-and-nav">
+            <h1>
+                <a href="./home.html">貪婪天堂</a>
+            </h1>
+        </div>
+        
+        <div class="actions">
+            <input type="text" placeholder="Search">
+            <button class="cart" onclick="location.href='/cart.html'">購物車</button>
+            <button class="cart account" id="accountButton">帳號</button>
+            <button id="logoutButton" style="display: none;">登出</button>
+            <button id="memberCenterButton" style="display: none;">會員中心</button>     
+
+        </div>
+        <nav class="navigation">
+            <a href="./header/About Us.html">關於我們</a>
+            <a href="./home.html">主頁</a>
+            <a href="./header/Shop.html">Shop</a>
+            <a href="./header/FAQ.html">FAQ</a>
+            <a href="./header/Contact.html">Contact</a>
+        </nav>        
+    </header>
+    
+    <div class="spacer"></div>
+
+    <div class="main-content">
+
+    </div>
+
+    <section class="hero-section">
+        <div class="product-display">
+            <img class="carousel-image" src="./images/product1.jpg" alt="商品1" data-link="./details/product1.html" style="display: none;">
+            <img class="carousel-image" src="./images/product2.jpg" alt="商品2" data-link="./details/product2.html" style="display: none;">
+            <img class="carousel-image" src="./images/product3.jpg" alt="商品3" data-link="./details/product3.html" style="display: none;">
+            <img class="carousel-image" src="./images/product4.jpg" alt="商品4" data-link="./details/product4.html" style="display: none;">
+            <img class="carousel-image" src="./images/product5.jpg" alt="商品5" data-link="./details/product5.html" style="display: none;">
+            <img class="carousel-image" src="./images/product6.jpg" alt="商品6" data-link="./details/product6.html" style="display: none;">
+            <img class="carousel-image" src="./images/product7.jpg" alt="商品7" data-link="./details/product7.html" style="display: none;">
+            <img class="carousel-image" src="./images/product8.jpg" alt="商品8" data-link="./details/product8.html" style="display: none;">
+            <img class="carousel-image" src="./images/product9.jpg" alt="商品9" data-link="./details/product9.html" style="display: none;">
+            <img class="carousel-image" src="./images/product10.jpg" alt="商品10" data-link="./details/product10.html" style="display: none;">
+            <img class="carousel-image" src="./images/product11.jpg" alt="商品11" data-link="./details/product11.html" style="display: none;">
+            <img class="carousel-image" src="./images/product12.jpg" alt="商品12" data-link="./details/product12.html" style="display: none;">
+            <img class="carousel-image" src="./images/product13.jpg" alt="商品13" data-link="./details/product13.html" style="display: none;">
+            <img class="carousel-image" src="./images/product14.jpg" alt="商品14" data-link="./details/product14.html" style="display: none;">
+            <img class="carousel-image" src="./images/product15.jpg" alt="商品15" data-link="./details/product15.html" style="display: none;">
+            <img class="carousel-image" src="./images/product16.jpg" alt="商品16" data-link="./details/product16.html" style="display: none;">
+            <img class="carousel-image" src="./images/product17.jpg" alt="商品17" data-link="./details/product17.html" style="display: none;">
+            <img class="carousel-image" src="./images/product18.jpg" alt="商品18" data-link="./details/product18.html" style="display: none;">
+            <img class="carousel-image" src="./images/product19.jpg" alt="商品19" data-link="./details/product19.html" style="display: none;">
+            <img class="carousel-image" src="./images/product20.jpg" alt="商品20" data-link="./details/product20.html" style="display: none;">
+            <img class="carousel-image" src="./images/product21.jpg" alt="商品21" data-link="./details/product21.html" style="display: none;">
+            <img class="carousel-image" src="./images/product22.jpg" alt="商品22" data-link="./details/product22.html" style="display: none;">
+            <img class="carousel-image" src="./images/product23.jpg" alt="商品23" data-link="./details/product23.html" style="display: none;">
+            <img class="carousel-image" src="./images/product24.jpg" alt="商品24" data-link="./details/product24.html" style="display: none;">
+            <img class="carousel-image" src="./images/product25.jpg" alt="商品25" data-link="./details/product25.html" style="display: none;">
+            <img class="carousel-image" src="./images/product26.jpg" alt="商品26" data-link="./details/product26.html" style="display: none;">
+            <img class="carousel-image" src="./images/product27.jpg" alt="商品27" data-link="./details/product27.html" style="display: none;">
+            <img class="carousel-image" src="./images/product28.jpg" alt="商品28" data-link="./details/product28.html" style="display: none;">
+            <img class="carousel-image" src="./images/product29.jpg" alt="商品29" data-link="./details/product29.html" style="display: none;">
+            <img class="carousel-image" src="./images/product30.jpg" alt="商品30" data-link="./details/product30.html" style="display: none;">
+            <img class="carousel-image" src="./images/product31.jpg" alt="商品31" data-link="./details/product31.html" style="display: none;">
+            <img class="carousel-image" src="./images/product32.jpg" alt="商品32" data-link="./details/product32.html" style="display: none;">
+            <img class="carousel-image" src="./images/product33.jpg" alt="商品33" data-link="./details/product33.html" style="display: none;">
+            <img class="carousel-image" src="./images/product34.jpg" alt="商品34" data-link="./details/product34.html" style="display: none;">
+            <img class="carousel-image" src="./images/product35.jpg" alt="商品35" data-link="./details/product35.html" style="display: none;">
+            <img class="carousel-image" src="./images/product36.jpg" alt="商品36" data-link="./details/product36.html" style="display: none;">
+            <img class="carousel-image" src="./images/product37.jpg" alt="商品37" data-link="./details/product37.html" style="display: none;">
+            <img class="carousel-image" src="./images/product38.jpg" alt="商品38" data-link="./details/product38.html" style="display: none;">
+            <img class="carousel-image" src="./images/product39.jpg" alt="商品39" data-link="./details/product39.html" style="display: none;">
+            <img class="carousel-image" src="./images/product40.jpg" alt="商品40" data-link="./details/product40.html" style="display: none;">
+            <img class="carousel-image" src="./images/product41.jpg" alt="商品41" data-link="./details/product41.html" style="display: none;">
+            <img class="carousel-image" src="./images/product42.jpg" alt="商品42" data-link="./details/product42.html" style="display: none;">
+            <img class="carousel-image" src="./images/product43.jpg" alt="商品43" data-link="./details/product43.html" style="display: none;">
+            <img class="carousel-image" src="./images/product44.jpg" alt="商品44" data-link="./details/product44.html" style="display: none;">
+            <img class="carousel-image" src="./images/product45.jpg" alt="商品45" data-link="./details/product45.html" style="display: none;">
+            <img class="carousel-image" src="./images/product46.jpg" alt="商品46" data-link="./details/product46.html" style="display: none;">
+            <img class="carousel-image" src="./images/product47.jpg" alt="商品47" data-link="./details/product47.html" style="display: none;">
+            <img class="carousel-image" src="./images/product48.jpg" alt="商品48" data-link="./details/product48.html" style="display: none;">
+        </div>                
+    </section>
+    <div class="store-category-title">
+        <h2>探索商店類別</h2>
+        <div class="title-decorator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+<div class="categories">
+
+    <div class="category">
+        <div class="category-display">
+            <img class="category-image" src="./images/product1.jpg" alt="海賊王" style="display: block;">
+            <img class="category-image" src="./images/product2.jpg" alt="海賊王" style="display: none;">
+            <img class="category-image" src="./images/product11.jpg" alt="海賊王" style="display: none;">
+            <img class="category-image" src="./images/product12.jpg" alt="海賊王" style="display: none;">
+            <img class="category-image" src="./images/product13.jpg" alt="海賊王" style="display: none;">
+            <img class="category-image" src="./images/product14.jpg" alt="海賊王" style="display: none;">
+            <img class="category-image" src="./images/product15.jpg" alt="海賊王" style="display: none;">
+            <img class="category-image" src="./images/product16.jpg" alt="海賊王" style="display: none;">
+        </div>
+        <div class="carousel-button">
+            <a href="../category/onepiece.html" class="shop-now">海賊王</a>
+        </div>
+    </div>
+    <div class="category">
+        <div class="category-display">
+            <img class="category-image" src="./images/product7.jpg" alt="獵人" style="display: block;">
+            <img class="category-image" src="./images/product8.jpg" alt="獵人" style="display: none;">
+            <img class="category-image" src="./images/product9.jpg" alt="獵人" style="display: none;">
+            <img class="category-image" src="./images/product10.jpg" alt="獵人" style="display: none;">
+            <img class="category-image" src="./images/product9.jpg" alt="獵人" style="display: none;">
+            <img class="category-image" src="./images/product9.jpg" alt="獵人" style="display: none;">
+        </div>
+        <div class="carousel-button">
+            <a href="../category/hunter.html" class="shop-now">獵人</a>
+        </div>
+    </div>
+    <div class="category">
+        <div class="category-display">
+            <img class="category-image" src="./images/product3.jpg" alt="咒術迴戰" style="display: block;">
+            <img class="category-image" src="./images/product4.jpg" alt="咒術迴戰" style="display: none;">
+            <img class="category-image" src="./images/product5.jpg" alt="咒術迴戰" style="display: none;">
+        </div>
+        <div class="carousel-button">
+            <a href="../category/jujutsu.html" class="shop-now">咒術迴戰</a>
+        </div>
+    </div>
+    <div class="category">
+        <div class="category-display">
+            <img class="category-image" src="./images/product18.jpg" alt="火影忍者" style="display: block;">
+            <img class="category-image" src="./images/product19.jpg" alt="火影忍者" style="display: none;">
+            <img class="category-image" src="./images/product17.jpg" alt="火影忍者" style="display: none;">
+        </div>
+        <div class="carousel-button">
+            <a href="../category/naruto.html" class="shop-now">火影忍者</a>
+        </div>
+    </div>
+    <div class="category">
+        <div class="category-display">
+            <img class="category-image" src="./images/product29.jpg" alt="葬送的芙莉蓮" style="display: block;">
+            <img class="category-image" src="./images/product30.jpg" alt="葬送的芙莉蓮" style="display: none;">
+            <img class="category-image" src="./images/product31.jpg" alt="葬送的芙莉蓮" style="display: none;">
+        </div>
+        <div class="carousel-button">
+            <a href="../category/frieren.html" class="shop-now">葬送的芙莉蓮</a>
+        </div>
+    </div>
+
+    
+    <div class="category">
+        <div class="category-placeholder">
+            <span class="placeholder-text">敬請期待</span>
+        </div>
+    </div>
+    <div class="category">
+        <div class="category-placeholder">
+            <span class="placeholder-text">敬請期待</span>
+        </div>
+    </div>
+    <div class="category">
+        <div class="category-placeholder">
+            <span class="placeholder-text">敬請期待</span>
+        </div>
+    </div>
+</div>
+
+<section id="hotItemsWrapper">
+    <button id="prevButton" class="arrow-button">❮</button>
+    <div id="hotItems" class="hot-items-container">
+        <!-- 此处的内容将通过 JavaScript 动态生成 -->
+    </div>
+    <button id="nextButton" class="arrow-button">❯</button>
+</section>
+
+<script src="hot.js"></script>
+
+
+
+
+    <footer class="site-footer">
+        <p>© 2024 貪婪天堂. All rights reserved.</p>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="login-modal" id="loginModal">
+      <h3 id="modalTitle">登入</h3>
+      <input type="text" id="usernameInput" placeholder="使用者名稱">
+      <input type="password" id="passwordInput" placeholder="密碼">
+      <button id="loginSubmitButton">登入</button>
+      <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+      <button onclick="closeLoginModal()">取消</button>
+    </div>
+  
+    <script>
+      const accountButton = document.getElementById("accountButton");
+      const logoutButton = document.getElementById("logoutButton");
+      const memberCenterButton = document.getElementById("memberCenterButton");
+
+      const loginModal = document.getElementById("loginModal");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const usernameInput = document.getElementById("usernameInput");
+      const loginSubmitButton = document.getElementById("loginSubmitButton");
+  
+      // 更新登入狀態
+    const updateLoginStatus = () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const username = localStorage.getItem("username");
+
+        if (isLoggedIn === "true" && username) {
+            accountButton.textContent = `${username} 已登入`;
+            accountButton.disabled = true;
+            logoutButton.style.display = "inline-block";
+            memberCenterButton.style.display = "inline-block";
+        } else {
+            accountButton.textContent = "帳號";
+            accountButton.disabled = false;
+            logoutButton.style.display = "none";
+            memberCenterButton.style.display = "none";
+        }
+    };
+  
+      accountButton.addEventListener("click", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          loginModal.classList.add("active");
+          modalOverlay.classList.add("active");
+        }
+      });
+  
+      logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("username");
+        alert("已登出！");
+        updateLoginStatus();
+      });
+      // 處理登入提交
+   loginSubmitButton.addEventListener("click", () => {
+            const username = usernameInput.value.trim();
+            if (username) {
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("username", username);
+                alert(`${username}，登入成功！`);
+                closeLoginModal();
+                updateLoginStatus();
+            } else {
+                alert("請輸入使用者名稱！");
+            }
+        });
+  
+      const closeLoginModal = () => {
+        loginModal.classList.remove("active");
+        modalOverlay.classList.remove("active");
+        usernameInput.value = "";
+      };
+  
+      modalOverlay.addEventListener("click", closeLoginModal);
+  // 會員中心按鈕跳轉
+  memberCenterButton.addEventListener("click", () => {
+        window.location.href = "/center.html";
+    });
+      window.addEventListener("load", updateLoginStatus);
+    </script>
+
+    <script src="homepage/carousel.js"></script>
+    <script src="homepage/hot.js"></script>
+</body>
+</html>

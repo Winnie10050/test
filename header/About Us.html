@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="ach.css">
+    <link rel="stylesheet" href="teammember.css">
+
+</head>
+<body>
+    <div class="banner">
+        <div class="logo-and-nav">
+            <h1>貪婪天堂</h1>
+            <nav>
+                <a href="..\home.html">Home</a>
+                <a href="..\header/About Us.html">About Us</a>
+                <a href="..\header/FAQ.html">FAQ</a>
+                <a href="..\header/Contact.html">Contact</a>
+                <a href="..\header/Shop.html">Shop</a>
+            </nav>
+        </div>
+        <div class="actions">
+            <input type="text" placeholder="Search">
+            <button onclick="location.href='/cart.html'">購物車</button>
+            <button id="accountButton">帳號</button>
+            <button id="logoutButton" style="display: none;">登出</button>
+            <button id="memberCenterButton" style="display: none;">會員中心</button>     
+
+          </div>
+    </div>
+
+    <div class="content-container">
+        <p>
+            <strong>關於我們</strong><br>
+            歡迎來到 <strong>貪婪天堂</strong>，這是每一位動漫愛好者與收藏家的夢想國度！我們專注於提供高品質的動漫公仔和收藏品，滿足您對角色的熱愛與收藏的渴望。<br>
+            <br>
+            <strong>我們的使命</strong><br>
+            <br>
+            致力於將二次元的精彩世界帶入現實生活，讓每位顧客都能擁有自己心儀的角色公仔，並感受到角色在您手中重現的魅力。<br>
+            <br>
+            <strong>我們的產品</strong><br>
+            <br>
+            我們提供來自全球多個知名動漫品牌的正版公仔，涵蓋經典作品與熱門新番，包括：<br>
+            • 航海王：紅髮香克斯、魯夫、索隆等經典角色。<br>
+            • 咒術迴戰：五條悟、宿儺、虎杖悠仁等超人氣角色。<br>
+            • 獵人：西索、奇犽、庫洛洛等傳奇角色。<br>
+            • 火影忍者、進擊的巨人 等其他多部知名作品中的角色也一應俱全！<br>
+            每一款公仔都經過嚴格挑選，確保品質與細節，讓您在收藏過程中感受到角色的靈魂與活力。<br>
+            <br>
+            <strong>為什麼選擇我們？</strong><br>
+            <br>
+            • 正版保障：所有商品均為正品，杜絕盜版。<br>
+            • 多樣選擇：數百款角色公仔可供挑選，總有一款是您的最愛。<br>
+            • 優質服務：我們提供貼心的客服支持，確保您的購物體驗順暢無憂。<br>
+            • 專屬優惠：定期推出促銷活動，讓您以最優惠的價格購得心儀商品。<br>
+        </p>
+        <div class="team-section">
+            <h2>我們的團隊</h2>
+            <div class="team-member">
+                <img src="../images/teammember1.jpg" alt="Member 1" class="team-photo">
+                <div class="member-info">
+                    <h3>陳大文</h3>
+                    <p>陳大文是貪婪天堂的創辦人之一，熱愛動漫及其文化。他有著多年的動漫收藏經驗，並且致力於推動動漫商品的品質。</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="../images/teammember2.jpg" alt="Member 2" class="team-photo">
+                <div class="member-info">
+                    <h3>李小娜</h3>
+                    <p>李小娜負責我們的客服與商品選品，對於客戶需求有著極高的敏感度。她總是帶著笑容，幫助顧客找到最喜愛的商品。</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="../images/teammember3.jpg" alt="Member 2" class="team-photo">
+                <div class="member-info">
+                    <h3>李小娜</h3>
+                    <p>李小娜負責我們的客服與商品選品，對於客戶需求有著極高的敏感度。她總是帶著笑容，幫助顧客找到最喜愛的商品。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+    <footer>
+        <p>&copy; 2024 貪婪天堂. All rights reserved</p>
+    </footer>
+    
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="login-modal" id="loginModal">
+      <h3 id="modalTitle">登入</h3>
+      <input type="text" id="usernameInput" placeholder="使用者名稱">
+      <input type="password" id="passwordInput" placeholder="密碼">
+      <button id="loginSubmitButton">登入</button>
+      <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+      <button onclick="closeLoginModal()">取消</button>
+    </div>
+  
+    <script>
+      const accountButton = document.getElementById("accountButton");
+      const logoutButton = document.getElementById("logoutButton");
+      const memberCenterButton = document.getElementById("memberCenterButton");
+      const loginModal = document.getElementById("loginModal");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const usernameInput = document.getElementById("usernameInput");
+      const loginSubmitButton = document.getElementById("loginSubmitButton");
+  
+      // 更新登入狀態
+    const updateLoginStatus = () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const username = localStorage.getItem("username");
+
+        if (isLoggedIn === "true" && username) {
+            accountButton.textContent = `${username} 已登入`;
+            accountButton.disabled = true;
+            logoutButton.style.display = "inline-block";
+            memberCenterButton.style.display = "inline-block";
+        } else {
+            accountButton.textContent = "帳號";
+            accountButton.disabled = false;
+            logoutButton.style.display = "none";
+            memberCenterButton.style.display = "none";
+        }
+    };
+
+      accountButton.addEventListener("click", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          loginModal.classList.add("active");
+          modalOverlay.classList.add("active");
+        }
+      });
+  
+      logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("username");
+        alert("已登出！");
+        updateLoginStatus();
+      });
+  
+      // 處理登入提交
+    loginSubmitButton.addEventListener("click", () => {
+        const username = usernameInput.value.trim();
+        if (username) {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("username", username);
+            alert(`${username}，登入成功！`);
+            closeLoginModal();
+            updateLoginStatus();
+        } else {
+            alert("請輸入使用者名稱！");
+        }
+    });
+      const closeLoginModal = () => {
+        loginModal.classList.remove("active");
+        modalOverlay.classList.remove("active");
+        usernameInput.value = "";
+      };
+  
+      modalOverlay.addEventListener("click", closeLoginModal);
+      // 會員中心按鈕跳轉
+    memberCenterButton.addEventListener("click", () => {
+        window.location.href = "/center.html";
+    });
+      window.addEventListener("load", updateLoginStatus);
+    </script>
+  
+
+
+</body>
+</html>
