@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="all.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="logo-and-nav">
+            <h1>貪婪天堂</h1>
+            <nav>
+                <a href="/Home.html">Home</a>
+                <a href="../header/About Us.html">About Us</a>
+                <a href="../header/FAQ.html">FAQ</a>
+                <a href="../header/Contact.html">Contact</a>
+                <a href="../header/Shop.html">Shop</a>
+              </nav>
+        </div>
+        <div class="actions">
+            <button onclick="location.href='/cart.html'">購物車</button>
+            <button id="accountButton">帳號</button>
+            <button id="logoutButton" style="display: none;">登出</button>
+            <button id="memberCenterButton" style="display: none;">會員中心</button>     
+
+        </div>
+    </div>
+
+    <header>
+        <button class="back-button" onclick="window.history.back()">&#8592;</button>
+    </header>
+
+    <div class="container">
+        <div class="product-image">
+            <img src="../images/product43.jpg">
+        </div>
+        <div class="product-details">
+            <h2>艾爾文 史密斯</h2>
+            <div class="price">$700</div>
+            <div class="description">
+                <p>進擊的巨人艾爾文史密斯figma 再版手辦進擊的巨人手辦模型積木
+                </p>
+            </div>
+            <div class="quantity">
+                <label for="quantity">數量:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
+            </div>
+            <button id="addToCartButton">加入購物車</button>        </div>
+    </div>
+    <div class="reviews">
+        <h3>商品評價</h3>
+        <div id="reviewsContainer"></div>
+        <div class="review-form">
+            <h4>新增評價</h4>
+            <textarea id="reviewText" placeholder="寫下您的評價"></textarea>
+            <label for="reviewRating">評分：</label>
+            <select id="reviewRating">
+                <option value="5">5 星</option>
+                <option value="4">4 星</option>
+                <option value="3">3 星</option>
+                <option value="2">2 星</option>
+                <option value="1">1 星</option>
+            </select>
+            <button id="submitReviewButton">提交評價</button>
+        </div>
+    </div>
+    <div class="product-container" id="random-products">
+    </div>
+
+    <footer>
+        <p>&copy; 2024 貪婪天堂. All rights reserved</p>
+    </footer>
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="login-modal" id="loginModal">
+      <h3 id="modalTitle">登入</h3>
+      <input type="text" id="usernameInput" placeholder="使用者名稱">
+      <input type="password" id="passwordInput" placeholder="密碼">
+      <button id="loginSubmitButton">登入</button>
+      <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+      <button onclick="closeLoginModal()">取消</button>
+    </div>
+  
+    <script>
+      const accountButton = document.getElementById("accountButton");
+      const logoutButton = document.getElementById("logoutButton");
+      const memberCenterButton = document.getElementById("memberCenterButton");
+
+      const loginModal = document.getElementById("loginModal");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const usernameInput = document.getElementById("usernameInput");
+      const loginSubmitButton = document.getElementById("loginSubmitButton");
+  
+      // 更新登入狀態
+    const updateLoginStatus = () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const username = localStorage.getItem("username");
+
+        if (isLoggedIn === "true" && username) {
+            accountButton.textContent = `${username} 已登入`;
+            accountButton.disabled = true;
+            logoutButton.style.display = "inline-block";
+            memberCenterButton.style.display = "inline-block";
+        } else {
+            accountButton.textContent = "帳號";
+            accountButton.disabled = false;
+            logoutButton.style.display = "none";
+            memberCenterButton.style.display = "none";
+        }
+    };
+      
+  
+      accountButton.addEventListener("click", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          loginModal.classList.add("active");
+          modalOverlay.classList.add("active");
+        }
+      });
+  
+      logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("username");
+        alert("已登出！");
+        updateLoginStatus();
+      });
+  
+      const closeLoginModal = () => {
+        loginModal.classList.remove("active");
+        modalOverlay.classList.remove("active");
+        usernameInput.value = "";
+      };
+  
+      modalOverlay.addEventListener("click", closeLoginModal);
+       // 會員中心按鈕跳轉
+    memberCenterButton.addEventListener("click", () => {
+        window.location.href = "/center.html";
+    });
+  
+      window.addEventListener("load", updateLoginStatus);
+    </script>
+    
+    <script>
+        const products = [
+        { name: "紅髮香克斯", image: "../images/product1.jpg", price: 750 , link: "product1.html"  },
+        { name: "特拉法爾加 羅", image: "../images/product2.jpg", price: 750 , link: "product2.html"  },
+        { name: "五條悟", image: "../images/product3.jpg", price: 580 , link: "product3.html" },
+        { name: "五條悟&夏油傑", image: "../images/product4.jpg", price: 1080 , link: "product4.html" },
+        { name: "虎杖悠仁", image: "../images/product5.jpg", price: 900 , link: "product5.html" },
+        { name: "真人", image: "../images/product6.jpg", price: 580 , link: "product6.html" },
+        { name: "奇犽 揍敵客", image: "../images/product7.jpg", price: 600 ,link: "product7.html"},
+        { name: "西索", image: "../images/product8.jpg", price: 1080 ,link: "product8.html"},
+        { name: "伊耳謎 揍敵客", image: "../images/product9.jpg", price: 980 ,link: "product9.html" },
+        { name: "小傑 富力士", image: "../images/product10.jpg", price: 1080 ,link: "product10.html"},
+        { name: "魯夫", image: "../images/product11.jpg", price: 110 ,link: "product11.html"},
+        { name: "卡塔庫利", image: "../images/product12.jpg", price: 195 ,link: "product12.html"},
+        { name: "羅羅諾亞 索隆", image: "../images/product13.jpg", price: 145 ,link: "product13.html"},
+        { name: "文斯莫克 山治", image: "../images/product14.jpg", price: 205 ,link: "product14.html"},
+        { name: "尤斯塔斯 基德", image: "../images/product15.jpg", price: 170 ,link: "product15.html"},
+        { name: "托尼托尼 喬巴", image: "../images/product16.jpg", price: 140 ,link: "product16.html"},
+        { name: "自來也", image: "../images/product17.jpg", price: 230 ,link: "product17.html"},
+        { name: "漩渦鳴人", image: "../images/product18.jpg", price: 120 ,link: "product18.html"},
+        { name: "宇智波 佐助", image: "../images/product19.jpg", price: 260 ,link: "product19.html"},
+        { name: "鳴人&伊魯卡", image: "../images/product20.jpg", price: 90 ,link: "product20.html"},
+        { name: "夏油傑", image: "../images/product21.jpg", price: 200 ,link: "product21.html" },
+        { name: "狗卷棘", image: "../images/product22.jpg", price: 135 ,link: "product22.html"},
+        { name: "兩面宿儺", image: "../images/product23.jpg", price: 175 ,link: "product23.html"},
+        { name: "里維 阿卡曼", image: "../images/product24.jpg", price: 250 ,link: "product24.html"},
+        { name: "漢吉 佐耶", image: "../images/product25.jpg", price: 185 ,link: "product25.html"},
+        { name: "米卡莎 阿卡曼", image: "../images/product26.jpg", price: 150 ,link: "product26.html"},
+        { name: "艾蓮 巨人化", image: "../images/product27.jpg", price: 225 ,link: "product27.html"},
+        { name: "艾蓮 葉卡", image: "../images/product28.jpg", price: 100 ,link: "product28.html"},
+        { name: "芙莉蓮(寶箱怪)", image: "../images/product29.jpg", price: 190 ,link: "product29.html"},
+        { name: "費綸", image: "../images/product30.jpg", price: 210 ,link: "product30.html"},
+        { name: "欣梅爾", image: "../images/product31.jpg", price: 210 ,link: "product31.html"},
+        { name: "阿烏拉", image: "../images/product32.jpg", price: 210 ,link: "product32.html" },
+        { name: "修塔爾克", image: "../images/product33.jpg", price: 210 ,link: "product33.html"},
+        { name: "我愛羅", image: "../images/product34.jpg", price: 210 ,link: "product34.html"},
+        { name: "卡卡西", image: "../images/product35.jpg", price: 210,link: "product35.html" },
+        { name: "春野櫻", image: "../images/product36.jpg", price: 210 ,link: "product36.html"},
+        { name: "宇智波 鼬", image: "../images/product37.jpg", price: 210 ,link: "product37.html"},
+        { name: "獸之巨人(吉克)", image: "../images/product38.jpg", price: 210 ,link: "product38.html"},
+        { name: "俠客", image: "../images/product39.jpg", price: 210 ,link: "product39.html"},
+        { name: "庫洛洛", image: "../images/product40.jpg", price: 210 ,link: "product40.html"},
+        { name: "庫拉皮卡", image: "../images/product41.jpg", price: 210 ,link: "product41.html"},
+        { name: "飛坦", image: "../images/product42.jpg", price: 210 ,link: "product42.html"},
+        { name: "艾爾文 史密斯", image: "../images/product43.jpg", price: 210 ,link: "product43.html"},
+        { name: "阿爾敏 亞魯雷特", image: "../images/product44.jpg", price: 210 ,link: "product44.html"},
+        { name: "芙莉蓮", image: "../images/product45.jpg", price: 210 ,link: "product45.html"},
+        { name: "尤蓓爾", image: "../images/product46.jpg", price: 210 ,link: "product46.html"},
+        { name: "芙莉蓮&欣梅爾", image: "../images/product47.jpg", price: 210 ,link: "product47.html"},
+        { name: "伏黑惠", image: "../images/product48.jpg", price: 210 ,link: "product48.html"}
+        ];
+
+        const currentProductName = "艾爾文 史密斯";
+        const container = document.getElementById("random-products");
+const storageKey = `randomProducts_${currentProductName}`;
+
+let randomProducts = JSON.parse(sessionStorage.getItem(storageKey));
+
+if (!randomProducts) {
+    const filteredProducts = products.filter(product => product.name !== currentProductName);
+    randomProducts = filteredProducts.length > 3 
+        ? filteredProducts.sort(() => Math.random() - 0.5).slice(0, 3) 
+        : filteredProducts;
+
+    sessionStorage.setItem("randomProducts", JSON.stringify(randomProducts));
+}
+
+renderProducts(randomProducts);
+
+function renderProducts(products) {
+    container.innerHTML = ""; 
+    products.forEach(product => {
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("product-item");
+        productDiv.innerHTML = `
+            <a href="${product.link}">
+                <img src="${product.image}" alt="${product.name}">
+                <p>${product.name}</p>
+                <p>${product.price}</p>
+            </a>
+        `;
+        container.appendChild(productDiv);
+    });
+}
+document.getElementById("addToCartButton").addEventListener("click", () => {
+    const productName = "艾爾文 史密斯"; 
+    const productPrice = 700; 
+    const productImage = "../images/product1.jpg"; 
+    const quantity = parseInt(document.getElementById("quantity").value); 
+
+    if (quantity < 1) {
+        alert("數量不能少於 1！");
+        return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = cart.findIndex(item => item.name === productName);
+    if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity += quantity;
+    } else {
+        cart.push({ name: productName, price: productPrice, image: productImage, quantity });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("商品已加入購物車！");
+});
+const reviewsContainer = document.getElementById("reviewsContainer");
+const submitReviewButton = document.getElementById("submitReviewButton");
+const reviewText = document.getElementById("reviewText");
+const reviewRating = document.getElementById("reviewRating");
+
+
+const productReviewsKey = `reviews_${currentProductName}`;
+const savedReviews = JSON.parse(localStorage.getItem(productReviewsKey)) || [];
+
+function renderReviews() {
+    reviewsContainer.innerHTML = "";
+    if (savedReviews.length === 0) {
+        reviewsContainer.innerHTML = "<p>目前尚無評價。</p>";
+    } else {
+        savedReviews.forEach(review => {
+            const reviewDiv = document.createElement("div");
+            reviewDiv.classList.add("review-item");
+            reviewDiv.innerHTML = `
+                <p>${review.text}</p>
+                <p>評分：${"★".repeat(review.rating)}</p>
+                <hr>
+            `;
+            reviewsContainer.appendChild(reviewDiv);
+        });
+    }
+}
+
+submitReviewButton.addEventListener("click", () => {
+    const text = reviewText.value.trim();
+    const rating = parseInt(reviewRating.value);
+
+    if (!text) {
+        alert("請填寫評價內容！");
+        return;
+    }
+
+    const newReview = { text, rating };
+    savedReviews.push(newReview);
+    localStorage.setItem(productReviewsKey, JSON.stringify(savedReviews));
+    reviewText.value = "";
+    reviewRating.value = "5";
+
+    alert("評價已提交！");
+    renderReviews();
+});
+
+renderReviews();
+
+    </script>
+</body>
+</html>

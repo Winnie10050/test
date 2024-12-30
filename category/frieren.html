@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>貪婪天堂 Shop</title>
+  <link rel="stylesheet" href="category.css">
+ 
+</head>
+<body>
+  <div class="banner">
+    <div class="logo-and-nav">
+      <h1>貪婪天堂</h1>
+      <nav>
+        <a href="/Home.html">Home</a>
+        <a href="/header/About Us.html">About Us</a>
+        <a href="/header/FAQ.html">FAQ</a>
+        <a href="/header/Contact.html">Contact</a>
+        <a href="/header/Shop.html">Shop</a>
+      </nav>
+    </div>
+    <div class="actions">
+      <input type="text" placeholder="Search">
+      <button onclick="location.href='/cart.html'">購物車</button>
+      <button id="accountButton">帳號</button>
+      <button id="logoutButton" style="display: none;">登出</button>
+      
+    </div>
+  </div>
+
+
+
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="login-modal" id="loginModal">
+    <h3 id="modalTitle">登入</h3>
+    <input type="text" id="usernameInput" placeholder="使用者名稱">
+    <input type="password" id="passwordInput" placeholder="密碼">
+    <button id="loginSubmitButton">登入</button>
+    <button id="switchToRegisterButton" onclick="location.href='/register.html'">註冊</button>
+    <button onclick="closeLoginModal()">取消</button>
+  </div>
+
+  <script>
+    const accountButton = document.getElementById("accountButton");
+    const logoutButton = document.getElementById("logoutButton");
+    const loginModal = document.getElementById("loginModal");
+    const modalOverlay = document.getElementById("modalOverlay");
+    const usernameInput = document.getElementById("usernameInput");
+    const loginSubmitButton = document.getElementById("loginSubmitButton");
+
+    loginSubmitButton.addEventListener("click", () => {
+      const username = usernameInput.value.trim();
+      const password = document.getElementById("passwordInput").value.trim();
+
+      if (!username || !password) {
+          alert("請輸入使用者名稱和密碼！");
+          return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("users")) || {};
+
+      if (users[username] && users[username].password === password) {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("username", username);
+          alert(`${username}，登入成功！`);
+          closeLoginModal();
+          updateLoginStatus();
+      } else {
+          alert("使用者名稱或密碼錯誤！");
+      }
+      });
+
+
+    const updateLoginStatus = () => {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      const username = localStorage.getItem("username");
+
+      if (isLoggedIn === "true" && username) {
+        accountButton.textContent = `${username} 已登入`;
+        accountButton.disabled = true;
+        logoutButton.style.display = "inline-block";
+        passwordInput.value = ""; // 清空密碼欄
+      } else {
+        accountButton.textContent = "帳號";
+        accountButton.disabled = false;
+        logoutButton.style.display = "none";
+      }
+    };
+
+    accountButton.addEventListener("click", () => {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      if (isLoggedIn !== "true") {
+        loginModal.classList.add("active");
+        modalOverlay.classList.add("active");
+      }
+    });
+
+    logoutButton.addEventListener("click", () => {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("username");
+      alert("已登出！");
+      updateLoginStatus();
+    });
+
+    const closeLoginModal = () => {
+      loginModal.classList.remove("active");
+      modalOverlay.classList.remove("active");
+      usernameInput.value = "";
+    };
+
+    modalOverlay.addEventListener("click", closeLoginModal);
+
+    window.addEventListener("load", updateLoginStatus);
+  </script>
+
+</body>
+
+
+  <div class="container">
+    <main>
+      <aside>
+        <h3>類別</h3>
+        <ul>
+          <li><a href="/category/onepiece.html">海賊王</a></li>
+          <li><a href="/category/hunter.html">獵人</a></li>
+          <li><a href="/category/jujutsu.html">咒術迴戰</a></li>
+          <li><a href="/category/naruto.html">火影忍者</a></li>
+          <li><a href="/category/frieren.html">葬送的芙莉蓮</a></li>
+          <li><a href="/category/oat.html">進擊的巨人</a></li>
+        </ul>
+      </aside>
+      
+
+      <section class="product-grid" id="productGrid">
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2024 貪婪天堂. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const products = [
+      { name: "芙莉蓮(寶箱怪)", image: "/images/product29.jpg", price: 190 ,link: "/details/product29.html"},
+      { name: "費綸", image: "/images/product30.jpg", price: 210 ,link: "/details/product30.html"},
+      { name: "欣梅爾", image: "/images/product31.jpg", price: 210 ,link: "/details/product31.html"},
+      { name: "阿烏拉", image: "/images/product32.jpg", price: 210 ,link: "/details/product32.html" },
+      { name: "修塔爾克", image: "/images/product33.jpg", price: 210 ,link: "/details/product33.html"},
+      { name: "芙莉蓮", image: "/images/product45.jpg", price: 210 ,link: "/details/product45.html"},
+      { name: "尤蓓爾", image: "/images/product46.jpg", price: 210 ,link: "/details/product46.html"},
+      { name: "芙莉蓮&欣梅爾", image: "/images/product47.jpg", price: 210 ,link: "/details/product47.html"}
+    ];
+
+
+
+    const productGrid = document.getElementById("productGrid");
+    products.forEach(product => {
+    const productCard = document.createElement("div");
+    productCard.classList.add("product-card");
+    productCard.innerHTML = `
+      <a href="${product.link}" style="text-decoration: none; color: inherit;">
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>價格: $${product.price}</p>
+      </a>
+      <button class="add-to-cart" data-name="${product.name}" data-price="${product.price}">加入購物車</button>`;
+    productGrid.appendChild(productCard);
+    });
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    document.addEventListener("click", event => {
+      if (event.target.classList.contains("add-to-cart")) {
+        const name = event.target.getAttribute("data-name");
+        const price = parseFloat(event.target.getAttribute("data-price"));
+
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+          existingItem.quantity += 1; 
+        } else {
+          cart.push({ name, price, quantity: 1 }); 
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${name} 已加入購物車！`);
+      }
+    });
+
+  </script>
+</body>
+</html>
